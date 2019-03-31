@@ -12,6 +12,7 @@ COPY ["ChatBox.csproj", "ChatBox/"]
 COPY ["Program.cs", "ChatBox/"]
 COPY ["Startup.cs", "ChatBox/"]
 COPY ["ChatHub.cs", "ChatBox/"]
+COPY ["User.cs", "ChatBox/"]
 RUN dotnet restore "ChatBox/ChatBox.csproj"
 COPY . .
 WORKDIR "/src/ChatBox"

@@ -12,5 +12,11 @@ namespace ChatBox
         {
             return Clients.All.SendAsync("SendMessage", user, message);
         }
+
+        public Task SendUserStatusUpdate(User user)
+        {
+            Console.WriteLine("User", user);
+            return Clients.All.SendAsync("userStatusUpdate", user);
+        }
     }
 }

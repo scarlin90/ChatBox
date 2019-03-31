@@ -1,0 +1,1 @@
+docker build -t chatbox-server:latest .

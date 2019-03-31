@@ -1,0 +1,1 @@
+yarn build && docker image build -t chatbox-client .

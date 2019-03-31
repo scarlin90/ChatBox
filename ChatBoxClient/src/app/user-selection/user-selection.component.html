@@ -1,0 +1,8 @@
+
+<div *ngIf="loggedInUser">
+  Logged In User: {{loggedInUser.username}}
+</div>
+
+<div *ngFor="let user of users;" (click)="loginUser(user)">
+{{user.username}} {{user.isOnline}}
+</div>
