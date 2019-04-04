@@ -1,3 +1,7 @@
-<p>
-  contact-list works!
-</p>
+<div *ngIf="loggedInUser">
+    Logged In User: {{model.loggedInUser.username}}
+  </div>
+  
+  <div *ngFor="let user of model.users;">
+  {{user.username}} {{user.isOnline}} {{user.connectionId}}
+  </div>

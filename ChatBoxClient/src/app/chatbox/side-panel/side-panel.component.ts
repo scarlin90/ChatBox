@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SidePanelModel } from './side-panel.model';
 
 @Component({
   selector: 'app-side-panel',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-panel.component.css']
 })
 export class SidePanelComponent implements OnInit {
+
+  @Input() model: SidePanelModel;
 
   constructor() { }
 
