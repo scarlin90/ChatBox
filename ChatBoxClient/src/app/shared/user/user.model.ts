@@ -5,6 +5,7 @@ export class User {
     public firstName: string;
     public lastname:string;
     public isOnline: boolean;
+    public connectionId: string;
 }
 
 export class UserList {
@@ -13,35 +14,40 @@ export class UserList {
         firstName: 'Sean',
         lastname: 'Carlin',
         username: 'scarlin',
-        isOnline: false    
+        isOnline: false,
+        connectionId: ''    
     },
     {
         id: 2,
         firstName: 'Steve',
         lastname: 'Jobs',
         username: 'sjobs',
-        isOnline: false
+        isOnline: false,
+        connectionId: ''  
     },
     {
         id: 3,
         firstName: 'Bill',
         lastname: 'Gates',
         username: 'bgates',
-        isOnline: false
+        isOnline: false,
+        connectionId: ''  
     },
     {
         id: 4,
         firstName: 'Elon ',
         lastname: 'Musk',
         username: 'emusk',
-        isOnline: false
+        isOnline: false,
+        connectionId: ''  
     },
     {
         id: 5,
         firstName: 'Jeff ',
         lastname: 'Bezos',
         username: 'jbezos',
-        isOnline: false
+        isOnline: false,
+        connectionId: ''  
     },
 ]
 }

@@ -25,6 +25,14 @@ export class UserService {
     })
   }
 
+  updateUserConnection(user: User, connectionId:string){
+    this.getUsers().map(u => {
+      if(u.id === user.id){
+        u.connectionId = connectionId;
+      }
+    })
+  }
+
   getLoginUser(): User {
     return this._loggedInUser;
   }

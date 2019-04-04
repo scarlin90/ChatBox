@@ -27,25 +27,57 @@ export class UserSelectionComponent implements OnInit {
             .withUrl('http://localhost:5000/chatbox')
             .configureLogging(signalR.LogLevel.Information)
             .build();
-
-        this._hubConnection.start().catch(err => console.error(err.toString()));
-        this._hubConnection.on('SendUserStatusUpdate', (user: User) => {
+    this._hubConnection.start().catch(err => console.error(err.toString()));
+        
+        this._hubConnection.on('SendUserStatusUpdate', (user: string) => {
           console.log("onSendUserStatusUpdate", user);
-           this._userService.updateUserActiveStatus(user, true);
+           let convertedUser = JSON.parse(user) as User;
+           console.log('convertedUser', convertedUser);
+           this._userService.updateUserActiveStatus(convertedUser, true);
         });
+        
+        // this._hubConnection.on('OnConnectedAsync', (connectionId: string) => {
+        //   console.log('onConnection', connectionId);
+        //    this._userService.updateUserConnection(this._userService.getLoginUser(), connectionId);
+        // });
+
+        this._hubConnection.on('getMyConnection', (connectionId: string) => {
+          console.log('onConnection', connectionId);
+           this._userService.updateUserConnection(this._userService.getLoginUser(), connectionId);
+           console.log('user connection', this._userService.getLoginUser());
+           if (this._hubConnection) {
+              this._hubConnection.invoke('RecieveUserConnection', JSON.stringify(this._userService.getLoginUser()));
+           }
+        });
+
+        this._hubConnection.on('recieveUserConnection', (user: string) => {
+          let convertedUser = JSON.parse(user) as User;
+          console.log('recieveUserConnection', convertedUser);
+           this._userService.updateUserConnection(convertedUser, convertedUser.connectionId);
+           console.log('user connection', this._userService.getLoginUser());
+        });
+
+        
   }
 
   loginUser(user:User) {
     this._userService.setLoginUser(user);
     this.loggedInUser = this._userService.getLoginUser();
-    
+    this.sendUserStatusUpdate(user);
   }
 
-  userStatusUpdate(user:User) {
+  async sendUserStatusUpdate(user:User) {
     console.log('userStatusUpdate', user)
     if (this._hubConnection) {
-      this._hubConnection.invoke('SendUserStatusUpdate', user);
+      this._hubConnection.invoke('Echo', JSON.stringify(user));
+      this._hubConnection.invoke('SendUserStatusUpdate', JSON.stringify(user));
     }
   }
+
+  logConnection(connectionId: string){
+    console.log('My Connection', connectionId);
+  }
+
+
 
 }
