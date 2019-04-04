@@ -2,8 +2,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UserSelectionComponent } from './user-selection/user-selection.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   { path: '',
@@ -11,7 +11,7 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: 'home', pathMatch: 'full', component: HomeComponent },
-  { path: '**', component: UserSelectionComponent }
+  { path: '**', component: LoginComponent }
 ];
 
 @NgModule({

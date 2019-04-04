@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { UserSelectionModule } from './user-selection/user-selection.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { HomeModule } from './home/home.module';
     FormsModule,
     AppRoutingModule,
     SharedModule,
-    UserSelectionModule,
+    LoginModule,
     HomeModule
   ],
   providers: [],

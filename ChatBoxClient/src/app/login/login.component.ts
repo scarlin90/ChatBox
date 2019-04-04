@@ -8,11 +8,11 @@ import { UserService } from '../shared/user/user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user-selection',
-  templateUrl: './user-selection.component.html',
-  styleUrls: ['./user-selection.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class UserSelectionComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   public users: User[] = [];
   public loggedInUser: User;
