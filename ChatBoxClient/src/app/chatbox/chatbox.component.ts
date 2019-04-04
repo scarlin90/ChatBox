@@ -19,6 +19,9 @@ export class ChatboxComponent implements OnInit {
           loggedInUser: this._userService.getLoginUser(),
           users: this._userService.getUsers()
         }
+      },
+      chatPanelModel: {
+        
       }
     };
   }

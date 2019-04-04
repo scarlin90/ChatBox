@@ -34,7 +34,7 @@ namespace ChatBox
             return Clients.All.SendAsync("Send", $"{Context.ConnectionId}: {message}");
         }
 
-        public Task RecieveUserConnection(string user)
+        public Task SendUserConnection(string user)
         {
             return Clients.Others.SendAsync("recieveUserConnection", $"{user}");
         }

@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
            this._userService.updateUserConnection(this._userService.getLoginUser(), connectionId);
            console.log('user connection', this._userService.getLoginUser());
            if (this._hubConnection) {
-              this._hubConnection.invoke('RecieveUserConnection', JSON.stringify(this._userService.getLoginUser()));
+              this._hubConnection.invoke('SendUserConnection', JSON.stringify(this._userService.getLoginUser()));
            }
         });
 
