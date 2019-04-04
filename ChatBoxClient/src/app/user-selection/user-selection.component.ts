@@ -5,6 +5,7 @@ import * as signalR from '@aspnet/signalr';
 
 import { User } from '../shared/user/user.model';
 import { UserService } from '../shared/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-selection',
@@ -18,7 +19,7 @@ export class UserSelectionComponent implements OnInit {
 
   private _hubConnection: HubConnection | undefined;
 
-  constructor(private _userService:UserService) { }
+  constructor(private router: Router, private _userService:UserService) { }
 
   ngOnInit() {
     this.users = this._userService.getUsers();
@@ -64,6 +65,7 @@ export class UserSelectionComponent implements OnInit {
     this._userService.setLoginUser(user);
     this.loggedInUser = this._userService.getLoginUser();
     this.sendUserStatusUpdate(user);
+    this.router.navigate(['/home']);
   }
 
   async sendUserStatusUpdate(user:User) {
