@@ -10,7 +10,15 @@ export class UserService {
 
   getUsers(): User[] {
     return UserList.APPUSERS;
-  }  
+  }
+  
+  getContactableUsers(): User[] {
+    return UserList.APPUSERS.filter(u => u.id !== this._loggedInUser.id);
+  }
+
+  getUserByUsername(username:string): User {
+    return UserList.APPUSERS.find(u => u.username === username);
+  }
   
   setLoginUser(user: User): any {
     this._loggedInUser = user;

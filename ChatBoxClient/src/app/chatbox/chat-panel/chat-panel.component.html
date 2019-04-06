@@ -1,3 +1,21 @@
-<p>
-  chat-panel works!
-</p>
+
+<div>Chat Id: {{ model.chatId }}</div>
+Recipients: 
+<div *ngFor="let recipient of model.recipients;">
+  {{ recipient.firstname }} {{ recipient.lastname }}
+</div>
+
+<div *ngFor="let message of model.chatHistory;">
+  <div>{{ message.timestamp | date:'medium' }} {{message.sender}} {{message.body}}</div>
+</div>
+
+<div class="row" >
+  <form class="form-inline">
+      <div class="form-group">
+          <label class="sr-only" for="message">Message</label>
+          <input [(ngModel)]="messageBody" name="messageBody" type="text" class="form-control" placeholder="your message..." required>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="onMessageSend()">Send</button>
+  </form>
+</div>
+

@@ -1,2 +1,18 @@
-<app-side-panel [model]="model.sidePanelModel"></app-side-panel>
-<app-chat-panel [model]="model.chatPanelModel"></app-chat-panel>
+<app-side-panel 
+    [model]="model.sidePanelModel"
+    (createChat)="onCreateChat($event)">
+</app-side-panel>
+<app-chat-panel 
+    *ngIf="model.activeChat.chatId"
+    [model]="model.activeChat"
+    (messageSend)="onMessageSend($event)">
+</app-chat-panel>
+
+------------------
+<div>
+        <div *ngFor="let chatPanel of model.chatPanels;">
+            <span (click)="selectChat(chatPanel)">{{chatPanel.chatId}} {{chatPanel.recipients.length}} </span>
+            </div>
+</div>
+
+------------------

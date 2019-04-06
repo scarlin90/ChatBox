@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user/user.service';
+import { SignalRService } from './signalr/signalr.service';
 
 @NgModule({
   imports: [
@@ -8,7 +9,8 @@ import { UserService } from './user/user.service';
   ],
   declarations: [],
   providers: [
-    UserService
+    UserService,
+    SignalRService
   ]
 })
 export class SharedModule { }

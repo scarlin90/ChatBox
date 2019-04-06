@@ -1,2 +1,5 @@
 
-<app-contact-list [model]="model.contactListModel"></app-contact-list>
+<app-contact-list 
+    [model]="model.contactListModel"
+    (createChat)="onCreateChat($event)">
+</app-contact-list>

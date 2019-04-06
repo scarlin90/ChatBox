@@ -3,5 +3,6 @@
   </div>
   
   <div *ngFor="let user of model.users;">
-  {{user.username}} {{user.isOnline}} {{user.connectionId}}
+  <span>{{user.username}} {{user.isOnline}} {{user.connectionId}}</span>
+  <span *ngIf="user.isOnline"><button class="btn btn-primary" (click)="onCreateChat(user)">Create Chat</button></span>
   </div>

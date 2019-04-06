@@ -2,7 +2,7 @@
 export class User {
     public id: number;
     public username: string;
-    public firstName: string;
+    public firstname: string;
     public lastname:string;
     public isOnline: boolean;
     public connectionId: string;
@@ -11,7 +11,7 @@ export class User {
 export class UserList {
     public static APPUSERS: User[] = [{
         id: 1,
-        firstName: 'Sean',
+        firstname: 'Sean',
         lastname: 'Carlin',
         username: 'scarlin',
         isOnline: false,
@@ -19,7 +19,7 @@ export class UserList {
     },
     {
         id: 2,
-        firstName: 'Steve',
+        firstname: 'Steve',
         lastname: 'Jobs',
         username: 'sjobs',
         isOnline: false,
@@ -27,7 +27,7 @@ export class UserList {
     },
     {
         id: 3,
-        firstName: 'Bill',
+        firstname: 'Bill',
         lastname: 'Gates',
         username: 'bgates',
         isOnline: false,
@@ -35,7 +35,7 @@ export class UserList {
     },
     {
         id: 4,
-        firstName: 'Elon ',
+        firstname: 'Elon ',
         lastname: 'Musk',
         username: 'emusk',
         isOnline: false,
@@ -43,7 +43,7 @@ export class UserList {
     },
     {
         id: 5,
-        firstName: 'Jeff ',
+        firstname: 'Jeff ',
         lastname: 'Bezos',
         username: 'jbezos',
         isOnline: false,

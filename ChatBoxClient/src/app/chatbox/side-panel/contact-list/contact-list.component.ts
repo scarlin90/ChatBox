@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 import { ContactListModel } from "./contact-list.model";
+import { User } from "../../../shared/user/user.model";
 
 @Component({
   selector: "app-contact-list",
@@ -10,7 +11,13 @@ import { ContactListModel } from "./contact-list.model";
 export class ContactListComponent implements OnInit {
   @Input() model: ContactListModel;
 
+  @Output() createChat: EventEmitter<User> = new EventEmitter<User>();
+
   constructor() {}
 
   ngOnInit() {}
+
+  onCreateChat(user: User) {
+    this.createChat.emit(user);
+  }
 }

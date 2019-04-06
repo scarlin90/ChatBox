@@ -15,7 +15,6 @@ namespace ChatBox
 
         public Task SendUserStatusUpdate(string user)
         {
-            Console.WriteLine("User", user);
             return Clients.All.SendAsync("SendUserStatusUpdate", user);
         }
 
@@ -41,7 +40,7 @@ namespace ChatBox
 
         public Task SendToConnection(string connectionId, string message)
         {
-            return Clients.Client(connectionId).SendAsync("Send", $"Private message from {Context.ConnectionId}: {message}");
+            return Clients.Client(connectionId).SendAsync("receivePrivateMessage", $"{message}");
         }
 
         public Task SendToGroup(string groupName, string message)
