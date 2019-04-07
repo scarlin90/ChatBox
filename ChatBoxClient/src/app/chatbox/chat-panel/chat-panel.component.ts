@@ -26,8 +26,6 @@ export class ChatPanelComponent implements OnInit {
       sender: '',
       timestamp: new Date()
     })
+    this.messageBody = '';
   }
-
-  this.messageBody = '';
-
 }

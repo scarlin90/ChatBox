@@ -1,3 +1,51 @@
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
+      <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+        <div class="row w-100">
+          <div class="col-lg-4 mx-auto">
+            <div class="auto-form-wrapper text-center">
+                <span class="logo-login"><i class="fas fa-box-open"></i> Chat Box</span>
+                <p>To sign in to Chat Box, please select an account.</p>
+                <div class="user-selection-wrapper">
+                <div class="user-wrapper" *ngFor="let user of users;" (click)="loginUser(user)">
+                    <div class="inline">
+                        <div class="profile-image">
+                            <img alt="profile image" [src]="user.avatar">
+                          </div>
+                    </div>
+                    <div class="inline">
+                        <div class="account-wrapper">
+                            {{user.firstname}} {{user.lastname}}
+                            <div >
+                              <small  class="designation text-muted">{{user.username}}</small>
+                              <span [ngClass]="{ 'online': user.isOnline, 'offline': !user.isOnline}" class="status-indicator"></span>
+                            </div>
+                          </div>
+                      </div>
+                </div>
+              </div>
+            </div>
+            <ul class="auth-footer">
+              <li>
+                <a href="#">Conditions</a>
+              </li>
+              <li>
+                <a href="#">Help</a>
+              </li>
+              <li>
+                <a href="#">Terms</a>
+              </li>
+            </ul>
+            <p class="footer-text text-center">copyright © 2019. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+
 
 <div *ngIf="loggedInUser">
   Logged In User: {{loggedInUser.username}}

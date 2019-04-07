@@ -1,0 +1,53 @@
+.logo-login {
+    color: #0b85c6;
+    font-size: 40px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.auto-form-wrapper .user-wrapper .profile-image {
+    width: 60px;
+}
+
+.auto-form-wrapper .user-wrapper .profile-image img {
+    border-radius: 100%;
+    max-width: 100%; }
+
+    .account-wrapper {
+        width: 100%;
+        text-align: justify;
+        padding-left: 10px;
+        padding-top: 5px;
+    }
+
+.user-wrapper {
+    display: flex;
+    padding: 5px;
+}
+
+.user-wrapper:hover {
+    display: flex;
+    cursor: pointer;
+    background-color: #0b85c6;
+    color: #FFF;
+    border-radius: 5px;
+}
+
+.user-wrapper-separator {
+    border-bottom: 1px solid #ccc;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.user-selection-wrapper {
+    margin: 0 auto;
+    width: 40%;
+}
+
+.inline {
+    display: inline;
+}
