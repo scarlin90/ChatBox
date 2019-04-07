@@ -7,7 +7,8 @@
                 <span class="logo-login"><i class="fas fa-box-open"></i> Chat Box</span>
                 <p>To sign in to Chat Box, please select an account.</p>
                 <div class="user-selection-wrapper">
-                <div class="user-wrapper" *ngFor="let user of users;" (click)="loginUser(user)">
+                <div class="user-wrapper" *ngFor="let user of users;">
+                  <div *ngIf="!user.isOnline" (click)="loginUser(user)">
                     <div class="inline">
                         <div class="profile-image">
                             <img alt="profile image" [src]="user.avatar">
@@ -22,6 +23,23 @@
                             </div>
                           </div>
                       </div>
+                    </div>
+                    <div *ngIf="user.isOnline">
+                        <div class="inline">
+                            <div class="profile-image">
+                                <img alt="profile image" [src]="user.avatar">
+                              </div>
+                        </div>
+                        <div class="inline">
+                            <div class="account-wrapper">
+                                {{user.firstname}} {{user.lastname}}
+                                <div >
+                                  <small  class="designation text-muted">{{user.username}}</small>
+                                  <span [ngClass]="{ 'online': user.isOnline, 'offline': !user.isOnline}" class="status-indicator"></span>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
                 </div>
               </div>
             </div>
