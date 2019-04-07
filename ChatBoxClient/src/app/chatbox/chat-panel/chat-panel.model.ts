@@ -1,3 +1,5 @@
+import { User } from "../../shared/user/user.model";
+
 export class ChatPanelModel {
     chatId: string;
     type:ChatType
@@ -14,4 +16,5 @@ export class MessageModel {
     body: string;
     sender: string;
     timestamp: Date;
+    user: User;
 }

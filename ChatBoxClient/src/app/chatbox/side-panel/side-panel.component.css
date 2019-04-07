@@ -1,0 +1,16 @@
+
+
+.chatbox-sidepanel-direct-header {
+    color: #FFF;
+    font-weight: bold;
+}
+
+.chatbox-active-panel {
+    font-weight: bold;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.chatbox-sidepanel-header-spacer {
+    margin-top: 10px;
+}

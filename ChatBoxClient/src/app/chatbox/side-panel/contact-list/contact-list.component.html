@@ -3,8 +3,11 @@
   </div>
   
   <div *ngFor="let user of model.users;">
-  <span>{{user.username}} {{user.isOnline}} {{user.connectionId}}</span>
-  <span *ngIf="user.isOnline">
-    <button class="btn btn-primary" (click)="onCreateChat(user)">Create Chat</button>
-  </span>
+    <span *ngIf="user.isOnline">
+      <i class="fas fa-comments chat-icon" (click)="onCreateChat(user)"></i>
+    </span>
+    <span *ngIf="!user.isOnline">
+        <i class="far fa-comments chat-icon-disabled" (click)="onCreateChat(user)"></i>
+      </span>
+    <span>{{user.firstname}} {{user.lastname}} <span [ngClass]="{ 'online': user.isOnline, 'offline': !user.isOnline}" class="status-indicator"></span></span>
   </div>

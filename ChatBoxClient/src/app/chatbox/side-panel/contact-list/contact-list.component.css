@@ -1,0 +1,10 @@
+
+.chat-icon:hover {
+    font-weight: bold;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.chat-icon-disabled {
+
+}

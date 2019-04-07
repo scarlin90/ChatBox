@@ -1,21 +1,43 @@
 
-<div>Chat Id: {{ model.chatId }}</div>
-Recipients: 
-<div *ngFor="let recipient of model.recipients;">
-  {{ recipient.firstname }} {{ recipient.lastname }}
-</div>
-
-<div *ngFor="let message of model.chatHistory;">
-  <div>{{ message.timestamp | date:'medium' }} {{message.sender}} {{message.body}}</div>
-</div>
-
-<div class="row" >
-  <form class="form-inline">
-      <div class="form-group">
-          <label class="sr-only" for="message">Message</label>
-          <input [(ngModel)]="messageBody" name="messageBody" type="text" class="form-control" placeholder="your message..." required>
+<div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-4">{{ model.chatId }}</h5>
+          <div class="fluid-container">
+            <div *ngFor="let message of model.chatHistory;" class="row ticket-card mt-3">
+              <div class="col-md-2">
+                <img class="img-sm rounded-circle mb-4 mb-md-0" [src]="message.user.avatar" alt="profile image">
+              </div>
+              <div class="ticket-details col-md-10">
+                <div class="d-flex">
+                  <p class="text-dark font-weight-semibold mr-2 mb-0 no-wrap">{{message.user.firstname}} {{message.user.lastname}}</p>
+                  <p class="mb-0 ellipsis"></p>
+                </div>
+                <p class="text-gray ellipsis mb-2">{{message.body}}</p>
+                <div class="row text-gray d-md-flex d-none">
+                  <div class="col-12 d-flex">
+                    <small class="mb-0 mr-2 text-muted">Received @</small>
+                    <small class="Last-responded mr-2 mb-0 text-muted">{{ message.timestamp | date:'medium' }}</small>
+                  </div>
+                </div>
+              </div>
+              <div class="ticket-actions col-md-2">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary" (click)="onMessageSend()">Send</button>
+    </div>
+  </div>
+
+<div class="row chatbox-forminput">
+  <form>
+      <div class="form-group">
+          <input class="form-control input-lg" type="text" [(ngModel)]="messageBody" name="messageBody" placeholder="your message..." required>
+          <button type="submit" class="btn btn-primary" (click)="onMessageSend()"><i class="fas fa-paper-plane"></i></button>
+      </div>
   </form>
 </div>
+
 

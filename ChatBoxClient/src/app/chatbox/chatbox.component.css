@@ -1,0 +1,48 @@
+
+.chatbox-wrapper {
+    width: 15%;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    z-index: 100;
+}
+
+
+.chatbox-sidepanel-wrapper {
+    color: #DDD;
+    background-color: #222;
+    height: 100vh;
+    border-right: 2px solid #0b85c6;
+    padding: 5px 15px;
+}
+
+.chatbox-header-wrapper {
+    padding: 6px 6px 4px 6px;
+    background: #444;
+    color: #fff;
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 4px solid #0b85c6;
+}
+
+.expanded {
+    width: 40%;
+}
+
+.chatbox-wrapper.maximized {
+    width: 100%;
+}
+
+.chatbox-body-wrapper.maximized {
+    height: 85vh !important;
+}
+
+.chatbox-body-wrapper {
+    height: 65vh;
+    background-color: #fcfcfc;
+    border: 1px solid #999;
+}
+
+.chatbox-active-chat {
+    display: inline;
+}

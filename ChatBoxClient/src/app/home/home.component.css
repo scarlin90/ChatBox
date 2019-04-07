@@ -3,3 +3,8 @@
     color: #FFF;
     font-size: 20px;
 }
+
+.blue {
+    background-color: #0b85c6 !important;
+    border-color:  #0b85c6 !important;
+}

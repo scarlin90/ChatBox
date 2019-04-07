@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { SidePanelModel } from './side-panel.model';
 import { User } from '../../shared/user/user.model';
+import { ChatPanelModel } from '../chat-panel/chat-panel.model';
 
 @Component({
   selector: 'app-side-panel',
@@ -14,6 +15,9 @@ export class SidePanelComponent implements OnInit {
   @Output() createGroupChat: EventEmitter<User> = new EventEmitter<User>();
   @Output() joinGroup: EventEmitter<string> = new EventEmitter<string>();
   @Output() leaveGroup: EventEmitter<string> = new EventEmitter<string>();
+  @Output() selectChat: EventEmitter<ChatPanelModel> = new EventEmitter<ChatPanelModel>();
+
+  public isCollapsed: boolean;
 
   constructor() { }
 
@@ -34,5 +38,9 @@ export class SidePanelComponent implements OnInit {
 
   onLeaveGroup(groupName: string) {
     this.leaveGroup.emit(groupName);
+  }
+
+  onSelectChat(chatPanel:ChatPanelModel) {
+    this.selectChat.emit(chatPanel);
   }
 }

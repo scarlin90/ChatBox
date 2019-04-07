@@ -12,6 +12,7 @@
 }
 
 .auto-form-wrapper .user-wrapper .profile-image img {
+    border: 2px solid #FFF;
     border-radius: 100%;
     max-width: 100%; }
 

@@ -1,16 +1,28 @@
 
-<app-contact-list 
-    [model]="model.contactListModel"
-    (createChat)="onCreateChat($event)"
-    (createGroupChat)="onCreateGroupChat($event)">
-</app-contact-list>
 
 <div>
-    Groups
-    <div *ngFor="let group of model.groups;">
-        <div>{{group.name}} 
-            <button *ngIf="!group.isMember" type="submit" class="btn btn-secondary" (click)="onJoinGroup(group.name)">Join Group</button>
-            <button *ngIf="group.isMember" type="submit" class="btn btn-error" (click)="onLeaveGroup(group.name)">Leave Group</button>
+
+    <div class="chatbox-sidepanel-direct-header">Contact List</div>
+    <app-contact-list 
+        [model]="model.contactListModel"
+        (createChat)="onCreateChat($event)"
+        (createGroupChat)="onCreateGroupChat($event)">
+    </app-contact-list>
+
+    <div *ngIf="model.chatPanels.length > 0" class="chatbox-sidepanel-header-spacer">
+        <div class="chatbox-sidepanel-direct-header">Private Chats</div>
+        <div *ngFor="let chatPanel of model.chatPanels;">
+            <span class="chatbox-active-panel" (click)="onSelectChat(chatPanel)">{{chatPanel.chatId}}</span>
         </div>
     </div>
+
+    <!-- <div>
+        Groups
+        <div *ngFor="let group of model.groups;">
+            <div>{{group.name}} 
+                <button *ngIf="!group.isMember" type="submit" class="btn btn-secondary" (click)="onJoinGroup(group.name)">Join Group</button>
+                <button *ngIf="group.isMember" type="submit" class="btn btn-error" (click)="onLeaveGroup(group.name)">Leave Group</button>
+            </div>
+        </div>
+    </div> -->
 </div>

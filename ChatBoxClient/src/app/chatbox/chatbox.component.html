@@ -1,25 +1,45 @@
-<app-side-panel 
-    [model]="model.sidePanelModel"
-    (createChat)="onCreateChat($event)"
-    (createGroupChat)="onCreateGroupChat($event)"
-    (joinGroup)="onJoinGroup($event)"
-    (leaveGroup)="onLeaveGroup($event)">
-</app-side-panel>
-<app-chat-panel 
-    *ngIf="model.activeChat.chatId"
-    [model]="model.activeChat"
-    (messageSend)="onMessageSend($event)">
-</app-chat-panel>
+<div [ngClass]="{ 'expanded': !isCollapsed, 'maximized': isMaximized}"  class="row chatbox-wrapper">
+    <div class="col-md-12">
+    <div class="chatbox-header-wrapper">
+        <div style="float:right">
+            <i *ngIf="!isMaximized" class="far fa-window-maximize" (click)="toggleMaximize()"></i>
+            <i *ngIf="isMaximized" class="fas fa-window-minimize" (click)="toggleMaximize()"></i>
+        </div>
+        <span (click)="toggleCollapse()"><i class="fas fa-box-open"></i>  Chat Box</span>
+    </div>
+    <div *ngIf="!isCollapsed" class="chatbox-body-wrapper" [ngClass]="{'maximized': isMaximized}">
+        <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4" >
+                    <div class="chatbox-sidepanel-wrapper">
+                        <app-side-panel 
+                        [model]="model.sidePanelModel"
+                        (createChat)="onCreateChat($event)"
+                        (createGroupChat)="onCreateGroupChat($event)"
+                        (joinGroup)="onJoinGroup($event)"
+                        (leaveGroup)="onLeaveGroup($event)"
+                        (selectChat)="onSelectChat($event)">
+                    </app-side-panel>
+                </div>
+                </div>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                        <div class="chatbox-active-chat">
+                                <app-chat-panel 
+                                    *ngIf="model.activeChat.chatId"
+                                    [model]="model.activeChat"
+                                    (messageSend)="onMessageSend($event)">
+                                </app-chat-panel>
+                                
+                                
+                                CreateGroup
+                                <input type="text" [(ngModel)]="model.createGroupName" />
+                                <button class="btn btn-primary" (click)="onCreateGroup(model.createGroupName)">Create Group</button>
+                            </div>
+                    </div>
 
-------------------
-<div>
-        <div *ngFor="let chatPanel of model.chatPanels;">
-            <span (click)="selectChat(chatPanel)">{{chatPanel.type}} : {{chatPanel.chatId}} {{chatPanel.recipients.length}} </span>
-            </div>
+        </div>
+        
+    </div>
+    </div>
 </div>
 
-------------------
 
-CreateGroup
-<input type="text" [(ngModel)]="model.createGroupName" />
-<button class="btn btn-primary" (click)="onCreateGroup(model.createGroupName)">Create Group</button>

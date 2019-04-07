@@ -15,6 +15,8 @@ import { Router } from "@angular/router";
 export class ChatboxComponent implements OnInit {
   public model: ChatBoxModel;
   public loggedInUser: User;
+  public isCollapsed: boolean = true;
+  public isMaximized: boolean;
 
   constructor(
     private _router: Router,
@@ -43,13 +45,14 @@ export class ChatboxComponent implements OnInit {
         contactListModel: {
           loggedInUser: this.loggedInUser,
           users: this._userService.getContactableUsers()
-        }
+        },
+        chatPanels: []
       },
-      chatPanels: []
     };
 
     this._signalRService.on('receivePrivateMessage', (message: string) => {
       let convertedMessageModel = JSON.parse(message) as MessageModel;
+      convertedMessageModel.user = this._userService.getUserByUsername(convertedMessageModel.sender);
       let chatId = `${ChatType.Private}-${convertedMessageModel.sender}-${this.loggedInUser.username}`;
       console.log('receivePrivateMessage', message);
       console.log('chatId', chatId);
@@ -72,6 +75,7 @@ export class ChatboxComponent implements OnInit {
 
     this._signalRService.on('receiveOthersGroupMessage', (groupName:string ,message: string) => {
       let convertedMessageModel = JSON.parse(message) as MessageModel;
+      convertedMessageModel.user = this._userService.getUserByUsername(convertedMessageModel.sender);
       let chatId = groupName;
 
       console.log('receiveOthersGroupMessage', message);
@@ -82,6 +86,7 @@ export class ChatboxComponent implements OnInit {
 
   onMessageSend(message: MessageModel) {
     message.sender = this.loggedInUser.username;
+    message.user = this.loggedInUser;
     console.log("this.model 2", this.model);
 
     this.model.activeChat.chatHistory.push(message);
@@ -109,7 +114,7 @@ export class ChatboxComponent implements OnInit {
   }
 
   onCreateChat(user: User) {
-
+    console.log('onCreateChat', user);
     const chat = {
       chatId: `${ChatType.Private}-${user.username}-${this.loggedInUser.username}`,
       type: ChatType.Private,
@@ -121,7 +126,7 @@ export class ChatboxComponent implements OnInit {
     };
 
     this.model.activeChat = chat;
-    this.model.chatPanels.push(chat);
+    this.model.sidePanelModel.chatPanels.push(chat);
 
   }
 
@@ -146,7 +151,7 @@ export class ChatboxComponent implements OnInit {
     };
 
     this.model.activeChat = chat;
-    this.model.chatPanels.push(chat);
+    this.model.sidePanelModel.chatPanels.push(chat);
 
     console.log(' this.loggedInUser.connectionId', this.loggedInUser.connectionId);
 
@@ -165,10 +170,10 @@ export class ChatboxComponent implements OnInit {
       recipients: []
     };
 
-    let chatpanelIndex = this.model.chatPanels.findIndex(cp => cp.chatId === groupName);
+    let chatpanelIndex = this.model.sidePanelModel.chatPanels.findIndex(cp => cp.chatId === groupName);
     console.log('chatpanelIndex', chatpanelIndex);
     if(chatpanelIndex !== -1){
-      this.model.chatPanels.splice(chatpanelIndex,1);
+      this.model.sidePanelModel.chatPanels.splice(chatpanelIndex,1);
     }
 
     let group = this.model.sidePanelModel.groups.find(g => g.name === groupName);
@@ -187,14 +192,22 @@ export class ChatboxComponent implements OnInit {
   }
 
 
-  selectChat(chatPanel: ChatPanelModel){
+  onSelectChat(chatPanel: ChatPanelModel){
     console.log('selected panel', chatPanel);
     this.model.activeChat = chatPanel;
   }
 
+  toggleCollapse() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+  toggleMaximize() {
+    this.isMaximized = !this.isMaximized;
+  }
+
   private receiveMessage(chatId:string, chatType: ChatType, message: MessageModel) {
 
-      const existingChatPanel = this.model.chatPanels.find(cp => cp.chatId === chatId);
+      const existingChatPanel = this.model.sidePanelModel.chatPanels.find(cp => cp.chatId === chatId);
       
       console.log('***** existingChatPanel', existingChatPanel);
       // existing add message to current chat
@@ -210,10 +223,10 @@ export class ChatboxComponent implements OnInit {
           this.model.activeChat.chatId = chatId;
           this.model.activeChat.recipients.push(message.sender);
           this.model.activeChat.recipients.push(this.loggedInUser.username);
-          this.model.chatPanels.push(this.model.activeChat);
+          this.model.sidePanelModel.chatPanels.push(this.model.activeChat);
         } else {
           console.log('***** new chat inactive');
-          this.model.chatPanels.push({
+          this.model.sidePanelModel.chatPanels.push({
             type: chatType,
             chatId: chatId,
             chatHistory: [message],

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { MessageModel, ChatPanelModel } from './chat-panel.model';
+import { User } from '../../shared/user/user.model';
 
 @Component({
   selector: 'app-chat-panel',
@@ -24,7 +25,8 @@ export class ChatPanelComponent implements OnInit {
     this.messageSend.emit({
       body: this.messageBody,
       sender: '',
-      timestamp: new Date()
+      timestamp: new Date(),
+      user: {} as User
     })
     this.messageBody = '';
   }

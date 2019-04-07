@@ -44,14 +44,3 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-
-
-
-<div *ngIf="loggedInUser">
-  Logged In User: {{loggedInUser.username}}
-</div>
-
-<div *ngFor="let user of users;" (click)="loginUser(user)">
-  <div><img width="400" [src]="user.avatar"/></div>
-  <div>{{user.username}} {{user.isOnline}} {{user.connectionId}}</div>
-</div>
