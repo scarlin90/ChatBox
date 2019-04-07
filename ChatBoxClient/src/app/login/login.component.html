@@ -4,5 +4,6 @@
 </div>
 
 <div *ngFor="let user of users;" (click)="loginUser(user)">
-{{user.username}} {{user.isOnline}} {{user.connectionId}}
+  <div><img width="400" [src]="user.avatar"/></div>
+  <div>{{user.username}} {{user.isOnline}} {{user.connectionId}}</div>
 </div>
