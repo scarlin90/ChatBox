@@ -1,5 +1,16 @@
 
 <app-contact-list 
     [model]="model.contactListModel"
-    (createChat)="onCreateChat($event)">
+    (createChat)="onCreateChat($event)"
+    (createGroupChat)="onCreateGroupChat($event)">
 </app-contact-list>
+
+<div>
+    Groups
+    <div *ngFor="let group of model.groups;">
+        <div>{{group.name}} 
+            <button *ngIf="!group.isMember" type="submit" class="btn btn-secondary" (click)="onJoinGroup(group.name)">Join Group</button>
+            <button *ngIf="group.isMember" type="submit" class="btn btn-error" (click)="onLeaveGroup(group.name)">Leave Group</button>
+        </div>
+    </div>
+</div>

@@ -28,4 +28,6 @@ export class ChatPanelComponent implements OnInit {
     })
   }
 
+  this.messageBody = '';
+
 }

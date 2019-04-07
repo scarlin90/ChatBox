@@ -1,6 +1,9 @@
 <app-side-panel 
     [model]="model.sidePanelModel"
-    (createChat)="onCreateChat($event)">
+    (createChat)="onCreateChat($event)"
+    (createGroupChat)="onCreateGroupChat($event)"
+    (joinGroup)="onJoinGroup($event)"
+    (leaveGroup)="onLeaveGroup($event)">
 </app-side-panel>
 <app-chat-panel 
     *ngIf="model.activeChat.chatId"
@@ -11,8 +14,12 @@
 ------------------
 <div>
         <div *ngFor="let chatPanel of model.chatPanels;">
-            <span (click)="selectChat(chatPanel)">{{chatPanel.chatId}} {{chatPanel.recipients.length}} </span>
+            <span (click)="selectChat(chatPanel)">{{chatPanel.type}} : {{chatPanel.chatId}} {{chatPanel.recipients.length}} </span>
             </div>
 </div>
 
 ------------------
+
+CreateGroup
+<input type="text" [(ngModel)]="model.createGroupName" />
+<button class="btn btn-primary" (click)="onCreateGroup(model.createGroupName)">Create Group</button>

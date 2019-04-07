@@ -11,6 +11,9 @@ export class SidePanelComponent implements OnInit {
   @Input() model: SidePanelModel;
   
   @Output() createChat: EventEmitter<User> = new EventEmitter<User>();
+  @Output() createGroupChat: EventEmitter<User> = new EventEmitter<User>();
+  @Output() joinGroup: EventEmitter<string> = new EventEmitter<string>();
+  @Output() leaveGroup: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
@@ -21,4 +24,15 @@ export class SidePanelComponent implements OnInit {
     this.createChat.emit(user);
   }
 
+  onCreateGroupChat(user: User) {
+    this.createGroupChat.emit(user);
+  }
+
+  onJoinGroup(groupName: string) {
+    this.joinGroup.emit(groupName);
+  }
+
+  onLeaveGroup(groupName: string) {
+    this.leaveGroup.emit(groupName);
+  }
 }

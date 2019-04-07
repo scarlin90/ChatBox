@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HubConnection } from '@aspnet/signalr';
-import signalR = require('@aspnet/signalr');
+import * as signalR from '@aspnet/signalr';
+
 import { signalRConfig } from './signalr-config.model';
 
 @Injectable()

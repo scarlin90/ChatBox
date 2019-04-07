@@ -12,6 +12,7 @@ export class ContactListComponent implements OnInit {
   @Input() model: ContactListModel;
 
   @Output() createChat: EventEmitter<User> = new EventEmitter<User>();
+  @Output() createGroupChat: EventEmitter<User> = new EventEmitter<User>();
 
   constructor() {}
 
@@ -19,5 +20,9 @@ export class ContactListComponent implements OnInit {
 
   onCreateChat(user: User) {
     this.createChat.emit(user);
+  }
+
+  onCreateGroupChat(user: User) {
+    this.createGroupChat.emit(user);
   }
 }

@@ -32,6 +32,10 @@ namespace ChatBox
         {
             return Clients.All.SendAsync("Send", $"{Context.ConnectionId}: {message}");
         }
+        public Task CreateGroup(string groupName)
+        {
+            return Clients.All.SendAsync("receiveCreateGroup", $"{groupName}");
+        }
 
         public Task SendUserConnection(string user)
         {
@@ -45,24 +49,24 @@ namespace ChatBox
 
         public Task SendToGroup(string groupName, string message)
         {
-            return Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId}@{groupName}: {message}");
+            return Clients.Group(groupName).SendAsync("receiveSendGroupMessage", $"{message}");
         }
 
         public Task SendToOthersInGroup(string groupName, string message)
         {
-            return Clients.OthersInGroup(groupName).SendAsync("Send", $"{Context.ConnectionId}@{groupName}: {message}");
+            return Clients.OthersInGroup(groupName).SendAsync("receiveOthersGroupMessage", groupName , $"{message}");
         }
 
-        public async Task JoinGroup(string groupName)
+        public async Task JoinGroup(string connectionId, string groupName)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+            await Groups.AddToGroupAsync(connectionId, groupName);
 
-            await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId} joined {groupName}");
+            await Clients.Group(groupName).SendAsync("receiveJoinGroupMessage", $"{groupName}",);
         }
 
-        public async Task LeaveGroup(string groupName)
+        public async Task LeaveGroup(string connectionId, string groupName)
         {
-            await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId} left {groupName}");
+            await Clients.Group(groupName).SendAsync("Send", $"{groupName}");
 
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
         }
