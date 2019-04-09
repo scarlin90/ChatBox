@@ -9,12 +9,12 @@
                 <div class="user-selection-wrapper">
                 <div class="user-wrapper" *ngFor="let user of users;">
                   <div *ngIf="!user.isOnline" (click)="loginUser(user)">
-                    <div class="inline">
+                    <div class="inline-table">
                         <div class="profile-image">
                             <img alt="profile image" [src]="user.avatar">
                           </div>
                     </div>
-                    <div class="inline">
+                    <div class="inline-table">
                         <div class="account-wrapper">
                             {{user.firstname}} {{user.lastname}}
                             <div >
@@ -25,12 +25,12 @@
                       </div>
                     </div>
                     <div *ngIf="user.isOnline">
-                        <div class="inline">
+                        <div class="inline-table">
                             <div class="profile-image">
                                 <img alt="profile image" [src]="user.avatar">
                               </div>
                         </div>
-                        <div class="inline">
+                        <div class="inline-table">
                             <div class="account-wrapper">
                                 {{user.firstname}} {{user.lastname}}
                                 <div >

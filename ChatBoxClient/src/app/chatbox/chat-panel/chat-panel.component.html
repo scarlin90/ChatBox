@@ -1,10 +1,12 @@
 
-<div class="row">
-    <div class="col-12 grid-margin">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title mb-4">{{ model.chatId }}</h5>
-          <div class="fluid-container">
+<div class="row chatbox-forminput">
+  <div class="col-md-12">
+    <input class="chat-box-message-input" type="text" [(ngModel)]="messageBody" name="messageBody" placeholder="your message..." required>
+    <button type="submit" class="btn btn-primary chat-box-send-button" (click)="onMessageSend()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+
+    <div class="grid-margin">
+          <h5 class="card-title">Active Chat: {{ model.chatId }}</h5>
             <div *ngFor="let message of model.chatHistory;" class="row ticket-card mt-3">
               <div class="col-md-2">
                 <img class="img-sm rounded-circle mb-4 mb-md-0" [src]="message.user.avatar" alt="profile image">
@@ -25,19 +27,7 @@
               <div class="ticket-actions col-md-2">
               </div>
             </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-
-<div class="row chatbox-forminput">
-  <form>
-      <div class="form-group">
-          <input class="form-control input-lg" type="text" [(ngModel)]="messageBody" name="messageBody" placeholder="your message..." required>
-          <button type="submit" class="btn btn-primary" (click)="onMessageSend()"><i class="fas fa-paper-plane"></i></button>
-      </div>
-  </form>
 </div>
 
 

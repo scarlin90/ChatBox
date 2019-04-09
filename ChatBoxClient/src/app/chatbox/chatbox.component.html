@@ -15,6 +15,7 @@
                         [model]="model.sidePanelModel"
                         (createChat)="onCreateChat($event)"
                         (createGroupChat)="onCreateGroupChat($event)"
+                        (addGroup)="onCreateGroup($event)"
                         (joinGroup)="onJoinGroup($event)"
                         (leaveGroup)="onLeaveGroup($event)"
                         (selectChat)="onSelectChat($event)">
@@ -30,9 +31,9 @@
                                 </app-chat-panel>
                                 
                                 
-                                CreateGroup
+                                <!-- CreateGroup
                                 <input type="text" [(ngModel)]="model.createGroupName" />
-                                <button class="btn btn-primary" (click)="onCreateGroup(model.createGroupName)">Create Group</button>
+                                <button class="btn btn-primary" (click)="onCreateGroup(model.createGroupName)">Create Group</button> -->
                             </div>
                     </div>
 

@@ -32,8 +32,7 @@ export class ChatboxComponent implements OnInit {
       this._router.navigate(['/login']);
     }
 
-    this.model = {
-      createGroupName: '',      
+    this.model = {    
       activeChat: {
         type: ChatType.Private,
         chatHistory: [],
@@ -41,6 +40,7 @@ export class ChatboxComponent implements OnInit {
         recipients: []
       },
       sidePanelModel: {
+        createGroupName: '',
         groups: [],
         contactListModel: {
           loggedInUser: this.loggedInUser,
@@ -54,8 +54,6 @@ export class ChatboxComponent implements OnInit {
       let convertedMessageModel = JSON.parse(message) as MessageModel;
       convertedMessageModel.user = this._userService.getUserByUsername(convertedMessageModel.sender);
       let chatId = `${ChatType.Private}-${convertedMessageModel.sender}-${this.loggedInUser.username}`;
-      console.log('receivePrivateMessage', message);
-      console.log('chatId', chatId);
       this.receiveMessage(chatId, ChatType.Private, convertedMessageModel);
 
     });
@@ -65,11 +63,9 @@ export class ChatboxComponent implements OnInit {
         name: groupName,
         isMember: false
       });
-      console.log('receiveCreateGroup', groupName);
     });
 
     this._signalRService.on('receiveJoinGroupMessage', (groupName: string) => {
-      console.log('receiveJoinGroupMessage', groupName);
       this.model.sidePanelModel.groups.find(g => g.name === groupName).isMember = true;
     });
 
@@ -78,8 +74,6 @@ export class ChatboxComponent implements OnInit {
       convertedMessageModel.user = this._userService.getUserByUsername(convertedMessageModel.sender);
       let chatId = groupName;
 
-      console.log('receiveOthersGroupMessage', message);
-      console.log('chatId', chatId);
       this.receiveMessage(chatId, ChatType.Group, convertedMessageModel);
     });
   }
@@ -87,23 +81,17 @@ export class ChatboxComponent implements OnInit {
   onMessageSend(message: MessageModel) {
     message.sender = this.loggedInUser.username;
     message.user = this.loggedInUser;
-    console.log("this.model 2", this.model);
 
     this.model.activeChat.chatHistory.push(message);
-
-    
-    console.log(`recipients 0: ${this.model.activeChat.recipients[0]}`);
     const recipientUser = this._userService.getUserByUsername(this.model.activeChat.recipients[0]);
 
     if(this.model.activeChat.type === ChatType.Private) {
-      console.log(`SendToConnection: ${recipientUser.connectionId}`, message);
       this._signalRService.hubConnection.invoke(
         "SendToConnection",
         recipientUser.connectionId,
         JSON.stringify(message)
       );
     } else {
-      console.log(`SendToOthersInGroup: ${this.model.activeChat.chatId}`, message);
       this._signalRService.hubConnection.invoke(
         "SendToOthersInGroup",
         this.model.activeChat.chatId,
@@ -114,7 +102,6 @@ export class ChatboxComponent implements OnInit {
   }
 
   onCreateChat(user: User) {
-    console.log('onCreateChat', user);
     const chat = {
       chatId: `${ChatType.Private}-${user.username}-${this.loggedInUser.username}`,
       type: ChatType.Private,
@@ -153,8 +140,6 @@ export class ChatboxComponent implements OnInit {
     this.model.activeChat = chat;
     this.model.sidePanelModel.chatPanels.push(chat);
 
-    console.log(' this.loggedInUser.connectionId', this.loggedInUser.connectionId);
-
     this._signalRService.hubConnection.invoke(
       "JoinGroup",
       this.loggedInUser.connectionId,
@@ -171,18 +156,14 @@ export class ChatboxComponent implements OnInit {
     };
 
     let chatpanelIndex = this.model.sidePanelModel.chatPanels.findIndex(cp => cp.chatId === groupName);
-    console.log('chatpanelIndex', chatpanelIndex);
     if(chatpanelIndex !== -1){
       this.model.sidePanelModel.chatPanels.splice(chatpanelIndex,1);
     }
 
     let group = this.model.sidePanelModel.groups.find(g => g.name === groupName);
-    console.log('group', group);
     if(group) {
       group.isMember = false;
     }
-
-    console.log('this.model.sidePanelModel', this.model.sidePanelModel);
 
     this._signalRService.hubConnection.invoke(
       "LeaveGroup",
@@ -191,9 +172,7 @@ export class ChatboxComponent implements OnInit {
     );
   }
 
-
   onSelectChat(chatPanel: ChatPanelModel){
-    console.log('selected panel', chatPanel);
     this.model.activeChat = chatPanel;
   }
 
@@ -209,7 +188,6 @@ export class ChatboxComponent implements OnInit {
 
       const existingChatPanel = this.model.sidePanelModel.chatPanels.find(cp => cp.chatId === chatId);
       
-      console.log('***** existingChatPanel', existingChatPanel);
       // existing add message to current chat
       if(existingChatPanel) {
         existingChatPanel.chatHistory.push(message);
@@ -218,14 +196,12 @@ export class ChatboxComponent implements OnInit {
         // and chat is active
         
         if(this.model.activeChat.chatId === chatId) {
-          console.log('***** new chat active');
           this.model.activeChat.chatHistory.push(message);
           this.model.activeChat.chatId = chatId;
           this.model.activeChat.recipients.push(message.sender);
           this.model.activeChat.recipients.push(this.loggedInUser.username);
           this.model.sidePanelModel.chatPanels.push(this.model.activeChat);
         } else {
-          console.log('***** new chat inactive');
           this.model.sidePanelModel.chatPanels.push({
             type: chatType,
             chatId: chatId,

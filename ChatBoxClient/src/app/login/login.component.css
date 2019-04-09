@@ -49,6 +49,6 @@
     width: 40%;
 }
 
-.inline {
-    display: inline;
+.inline-table {
+    display: inline-table;
 }

@@ -1,5 +1,24 @@
 
 .chatbox-forminput {
-    position: fixed;
-    bottom: 10px;
+    position: relative;
+    top: 20px;
+}
+
+.chat-box-message-input {
+    width: 80%;
+    display: inline;
+    border: 2px solid #0b85c6;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.chat-box-send-button {
+    padding: 17px;
+    border-radius: 7px;
+}
+
+.grid-margin {
+    padding: 15px;
+    width: 100%;
+    background-color: #FFF;
 }

@@ -34,30 +34,19 @@ export class LoginComponent implements OnInit {
     });
         
     this._signalRService.on('SendUserStatusUpdate', (user: string) => {
-      console.log("onSendUserStatusUpdate", user);
         let convertedUser = JSON.parse(user) as User;
-        console.log('convertedUser', convertedUser);
         this._userService.updateUserActiveStatus(convertedUser, true);
     });
-        
-    // this._hubConnection.on('OnConnectedAsync', (connectionId: string) => {
-    //   console.log('onConnection', connectionId);
-    //    this._userService.updateUserConnection(this._userService.getLoginUser(), connectionId);
-    // });
 
     this._signalRService.on('getMyConnection', (connectionId: string) => {
-      console.log('onConnection', connectionId);
         this._userService.updateUserConnection(this._userService.getLoginUser(), connectionId);
-        console.log('user connection', this._userService.getLoginUser());
         this._signalRService.hubConnection.invoke('SendUserConnection', JSON.stringify(this._userService.getLoginUser()));
         
     });
 
     this._signalRService.on('recieveUserConnection', (user: string) => {
       let convertedUser = JSON.parse(user) as User;
-      console.log('recieveUserConnection', convertedUser);
         this._userService.updateUserConnection(convertedUser, convertedUser.connectionId);
-        console.log('user connection', this._userService.getLoginUser());
     });
 
         
@@ -71,7 +60,6 @@ export class LoginComponent implements OnInit {
   }
 
   async sendUserStatusUpdate(user:User) {
-    console.log('userStatusUpdate', user)
       this._signalRService.hubConnection.invoke('Echo', JSON.stringify(user));
       this._signalRService.hubConnection.invoke('SendUserStatusUpdate', JSON.stringify(user));
   }
