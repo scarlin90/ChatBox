@@ -61,7 +61,7 @@ namespace ChatBox
         {
             await Groups.AddToGroupAsync(connectionId, groupName);
 
-            await Clients.Group(groupName).SendAsync("receiveJoinGroupMessage", $"{groupName}",);
+            await Clients.Group(groupName).SendAsync("receiveJoinGroupMessage", $"{groupName}");
         }
 
         public async Task LeaveGroup(string connectionId, string groupName)
